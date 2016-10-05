@@ -26,6 +26,7 @@ use Fusio\Adapter\Memcache\Tests\MemcacheTestCase;
 use Fusio\Engine\Form\Builder;
 use Fusio\Engine\Form\Container;
 use Fusio\Engine\Model\Action;
+use Fusio\Engine\Response;
 use Fusio\Engine\ResponseInterface;
 use Fusio\Engine\Test\CallbackAction;
 
@@ -45,7 +46,7 @@ class MemcacheResponseTest extends MemcacheTestCase
         $action->setName('foo');
         $action->setClass(CallbackAction::class);
         $action->setConfig([
-            'callback' => function(){
+            'callback' => function(Response\FactoryInterface $response){
                 // make sure that this is only called once
                 static $count = 0;
                 $count++;
@@ -54,7 +55,7 @@ class MemcacheResponseTest extends MemcacheTestCase
                     $this->fail('Callback should be only called once');
                 }
 
-                return ['id' => 1, 'title' => 'foo', 'content' => 'bar', 'date' => '2015-02-27 19:59:15'];
+                return $response->build(200, [], ['id' => 1, 'title' => 'foo', 'content' => 'bar', 'date' => '2015-02-27 19:59:15']);
             },
         ]);
 
