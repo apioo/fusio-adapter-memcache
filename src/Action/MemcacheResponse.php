@@ -3,7 +3,7 @@
  * Fusio
  * A web-application to create dynamically RESTful APIs
  *
- * Copyright (C) 2015-2016 Christoph Kappestein <k42b3.x@gmail.com>
+ * Copyright (C) 2015-2016 Christoph Kappestein <christoph.kappestein@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -22,36 +22,22 @@
 namespace Fusio\Adapter\Memcache\Action;
 
 use Doctrine\Common\Cache;
-use Fusio\Engine\ActionInterface;
-use Fusio\Engine\ConnectorInterface;
+use Fusio\Engine\ActionAbstract;
 use Fusio\Engine\ContextInterface;
 use Fusio\Engine\Form\BuilderInterface;
 use Fusio\Engine\Form\ElementFactoryInterface;
 use Fusio\Engine\ParametersInterface;
-use Fusio\Engine\ProcessorInterface;
 use Fusio\Engine\RequestInterface;
 
 /**
  * MemcacheResponse
  *
- * @author  Christoph Kappestein <k42b3.x@gmail.com>
+ * @author  Christoph Kappestein <christoph.kappestein@gmail.com>
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    http://fusio-project.org
  */
-class MemcacheResponse implements ActionInterface
+class MemcacheResponse extends ActionAbstract
 {
-    /**
-     * @Inject
-     * @var \Fusio\Engine\ConnectorInterface
-     */
-    protected $connector;
-
-    /**
-     * @Inject
-     * @var \Fusio\Engine\ProcessorInterface
-     */
-    protected $processor;
-
     public function getName()
     {
         return 'Memcache-Response';
@@ -78,16 +64,6 @@ class MemcacheResponse implements ActionInterface
         $builder->add($elementFactory->newConnection('connection', 'Connection', 'Connection to a memcache or redis server'));
         $builder->add($elementFactory->newAction('action', 'Action', 'The response of this action is cached'));
         $builder->add($elementFactory->newInput('expire', 'Expire', 'number', 'Number of seconds when the cache expires. 0 means infinite cache lifetime.'));
-    }
-
-    public function setConnector(ConnectorInterface $connector)
-    {
-        $this->connector = $connector;
-    }
-
-    public function setProcessor(ProcessorInterface $processor)
-    {
-        $this->processor = $processor;
     }
 
     /**
