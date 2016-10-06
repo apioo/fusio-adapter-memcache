@@ -1,6 +1,6 @@
 {
   "name": "fusio/adapter-memcache",
-  "description": "Adapter which can cache an action response using memcache",
+  "description": "Memcache adapter to cache the response of an action",
   "homepage": "http://fusio-project.org",
   "keywords": ["fusio-adapter"],
   "license": "AGPL-3.0",

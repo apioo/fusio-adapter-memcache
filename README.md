@@ -8,6 +8,4 @@ the following steps inside your Fusio project:
     composer require fusio/adapter-memcache
     php bin/fusio system:register Fusio\Adapter\Memcache\Adapter
 
-More informations about Fusio at http://fusio-project.org
-
 [Fusio]: http://fusio-project.org/
