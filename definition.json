@@ -1,7 +1,4 @@
 {
-  "actionClass": [
-    "Fusio\\Adapter\\Memcache\\Action\\MemcacheResponse"
-  ],
   "connectionClass": [
     "Fusio\\Adapter\\Memcache\\Connection\\Memcache"
   ]
