@@ -1,6 +1,6 @@
 {
   "name": "fusio/adapter-memcache",
-  "description": "Memcache adapter to cache the response of an action",
+  "description": "Provides a connection to work with a memcache service",
   "homepage": "http://fusio-project.org",
   "keywords": ["fusio-adapter"],
   "license": "AGPL-3.0",
@@ -14,7 +14,6 @@
   "require": {
     "php": ">=5.6",
     "ext-memcached": ">=2.0",
-    "doctrine/cache": "^1.6",
     "fusio/engine": "^0.6@dev"
   },
   "require-dev": {
