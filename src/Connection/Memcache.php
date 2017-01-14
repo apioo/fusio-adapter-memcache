@@ -53,7 +53,7 @@ class Memcache implements ConnectionInterface
 
             foreach ($parts as $part) {
                 $part = trim($part);
-                $pos  = strpos($part, ':');
+                $pos  = strrpos($part, ':');
                 if ($pos !== false) {
                     $ip   = substr($part, 0, $pos);
                     $port = (int) substr($part, $pos + 1);
