@@ -49,20 +49,21 @@ class Memcache implements ConnectionInterface
     {
         if (class_exists('Memcached')) {
             $memcache = new \Memcached();
-            $parts    = explode(',', $config->get('server'));
+            $hosts    = $config->get('host');
 
-            foreach ($parts as $part) {
-                $part = trim($part);
-                $pos  = strrpos($part, ':');
-                if ($pos !== false) {
-                    $ip   = substr($part, 0, $pos);
-                    $port = (int) substr($part, $pos + 1);
-                } else {
-                    $ip   = $part;
-                    $port = 11211;
+            if (is_array($hosts)) {
+                foreach ($hosts as $part) {
+                    $pos = strrpos($part, ':');
+                    if ($pos !== false) {
+                        $ip   = substr($part, 0, $pos);
+                        $port = (int) substr($part, $pos + 1);
+                    } else {
+                        $ip   = $part;
+                        $port = 11211;
+                    }
+
+                    $memcache->addServer($ip, $port);
                 }
-
-                $memcache->addServer($ip, $port);
             }
 
             return $memcache;
@@ -73,6 +74,6 @@ class Memcache implements ConnectionInterface
 
     public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory)
     {
-        $builder->add($elementFactory->newInput('server', 'Server', 'text', 'Comma seperated list of [ip]:[port] i.e. <code>192.168.2.18:11211,192.168.2.19:11211</code>'));
+        $builder->add($elementFactory->newTag('host', 'Host', 'Comma seperated list of [ip]:[port] i.e. <code>192.168.2.18:11211,192.168.2.19:11211</code>'));
     }
 }
