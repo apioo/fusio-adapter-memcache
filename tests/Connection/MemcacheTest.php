@@ -24,7 +24,7 @@ namespace Fusio\Adapter\Memcache\Tests\Connection;
 use Fusio\Adapter\Memcache\Connection\Memcache;
 use Fusio\Engine\Form\Builder;
 use Fusio\Engine\Form\Container;
-use Fusio\Engine\Form\Element\Input;
+use Fusio\Engine\Form\Element\Tag;
 use Fusio\Engine\Parameters;
 use Fusio\Engine\Test\EngineTestCaseTrait;
 use Memcached;
@@ -66,6 +66,6 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
 
         $elements = $builder->getForm()->getProperty('element');
         $this->assertEquals(1, count($elements));
-        $this->assertInstanceOf(Input::class, $elements[0]);
+        $this->assertInstanceOf(Tag::class, $elements[0]);
     }
 }
