@@ -21,6 +21,7 @@
 
 namespace Fusio\Adapter\Memcache\Connection;
 
+use Fusio\Engine\Connection\PingableInterface;
 use Fusio\Engine\ConnectionInterface;
 use Fusio\Engine\Exception\ConfigurationException;
 use Fusio\Engine\Form\BuilderInterface;
@@ -34,7 +35,7 @@ use Fusio\Engine\ParametersInterface;
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    http://fusio-project.org
  */
-class Memcache implements ConnectionInterface
+class Memcache implements ConnectionInterface, PingableInterface
 {
     public function getName()
     {
@@ -75,5 +76,15 @@ class Memcache implements ConnectionInterface
     public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory)
     {
         $builder->add($elementFactory->newTag('host', 'Host', 'Comma seperated list of [ip]:[port] i.e. <code>192.168.2.18:11211,192.168.2.19:11211</code>'));
+    }
+
+    public function ping($connection)
+    {
+        if ($connection instanceof \Memcached) {
+            $stats = $connection->getStats();
+            return !empty($stats);
+        } else {
+            return false;
+        }
     }
 }

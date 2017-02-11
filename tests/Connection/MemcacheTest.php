@@ -42,16 +42,16 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
 
     public function testGetConnection()
     {
-        /** @var Memcache $connection */
-        $connection = $this->getConnectionFactory()->factory(Memcache::class);
+        /** @var Memcache $connectionFactory */
+        $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
 
         $config = new Parameters([
             'server' => '127.0.0.1:11211',
         ]);
 
-        $memcache = $connection->getConnection($config);
+        $connection = $connectionFactory->getConnection($config);
 
-        $this->assertInstanceOf(Memcached::class, $memcache);
+        $this->assertInstanceOf(Memcached::class, $connection);
     }
 
     public function testConfigure()
@@ -67,5 +67,19 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $elements = $builder->getForm()->getProperty('element');
         $this->assertEquals(1, count($elements));
         $this->assertInstanceOf(Tag::class, $elements[0]);
+    }
+
+    public function testPing()
+    {
+        /** @var Memcache $connectionFactory */
+        $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
+
+        $config = new Parameters([
+            'server' => '127.0.0.1:11211',
+        ]);
+
+        $connection = $connectionFactory->getConnection($config);
+
+        $this->assertTrue($connectionFactory->ping($connection));
     }
 }
