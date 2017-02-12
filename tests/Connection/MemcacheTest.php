@@ -46,7 +46,7 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
 
         $config = new Parameters([
-            'host' => '127.0.0.1:11211',
+            'host' => ['127.0.0.1:11211'],
         ]);
 
         $connection = $connectionFactory->getConnection($config);
@@ -75,7 +75,7 @@ class MemcacheTest extends \PHPUnit_Framework_TestCase
         $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
 
         $config = new Parameters([
-            'host' => '127.0.0.1:11211',
+            'host' => ['127.0.0.1:11211'],
         ]);
 
         $connection = $connectionFactory->getConnection($config);
