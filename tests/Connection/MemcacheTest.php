@@ -28,6 +28,7 @@ use Fusio\Engine\Form\Element\Tag;
 use Fusio\Engine\Parameters;
 use Fusio\Engine\Test\EngineTestCaseTrait;
 use Memcached;
+use PHPUnit\Framework\TestCase;
 
 /**
  * MemcacheTest
@@ -36,7 +37,7 @@ use Memcached;
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    http://fusio-project.org
  */
-class MemcacheTest extends \PHPUnit_Framework_TestCase
+class MemcacheTest extends TestCase
 {
     use EngineTestCaseTrait;
 
