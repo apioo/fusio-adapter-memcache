@@ -48,29 +48,29 @@ class Memcache implements ConnectionInterface, PingableInterface
      */
     public function getConnection(ParametersInterface $config)
     {
-        if (class_exists('Memcache')) {
-            $memcache = new \Memcache();
-            $hosts    = $config->get('host');
-
-            if (is_array($hosts)) {
-                foreach ($hosts as $part) {
-                    $pos = strrpos($part, ':');
-                    if ($pos !== false) {
-                        $ip   = substr($part, 0, $pos);
-                        $port = (int) substr($part, $pos + 1);
-                    } else {
-                        $ip   = $part;
-                        $port = 11211;
-                    }
-
-                    $memcache->addServer($ip, $port);
-                }
-            }
-
-            return $memcache;
-        } else {
-            throw new ConfigurationException('PHP extension "memcached" is not installed');
+        if (!class_exists('Memcache')) {
+            throw new ConfigurationException('PHP extension "memcache" is not installed');
         }
+
+        $memcache = new \Memcache();
+        $hosts    = $config->get('host');
+
+        if (is_array($hosts)) {
+            foreach ($hosts as $part) {
+                $pos = strrpos($part, ':');
+                if ($pos !== false) {
+                    $ip   = substr($part, 0, $pos);
+                    $port = (int) substr($part, $pos + 1);
+                } else {
+                    $ip   = $part;
+                    $port = 11211;
+                }
+
+                $memcache->addServer($ip, $port);
+            }
+        }
+
+        return $memcache;
     }
 
     public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory)
