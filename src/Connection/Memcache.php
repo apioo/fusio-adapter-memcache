@@ -44,12 +44,12 @@ class Memcache implements ConnectionInterface, PingableInterface
 
     /**
      * @param \Fusio\Engine\ParametersInterface $config
-     * @return \Memcached
+     * @return \Memcache
      */
     public function getConnection(ParametersInterface $config)
     {
-        if (class_exists('Memcached')) {
-            $memcache = new \Memcached();
+        if (class_exists('Memcache')) {
+            $memcache = new \Memcache();
             $hosts    = $config->get('host');
 
             if (is_array($hosts)) {
@@ -80,7 +80,7 @@ class Memcache implements ConnectionInterface, PingableInterface
 
     public function ping($connection)
     {
-        if ($connection instanceof \Memcached) {
+        if ($connection instanceof \Memcache) {
             $stats = $connection->getStats();
             return !empty($stats);
         } else {
