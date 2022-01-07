@@ -3,7 +3,7 @@
  * Fusio
  * A web-application to create dynamically RESTful APIs
  *
- * Copyright (C) 2015-2018 Christoph Kappestein <christoph.kappestein@gmail.com>
+ * Copyright (C) 2015-2022 Christoph Kappestein <christoph.kappestein@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as published by
@@ -33,34 +33,21 @@ use PHPUnit\Framework\TestCase;
  *
  * @author  Christoph Kappestein <christoph.kappestein@gmail.com>
  * @license http://www.gnu.org/licenses/agpl-3.0
- * @link    http://fusio-project.org
+ * @link    https://www.fusio-project.org/
  */
 abstract class MemcacheTestCase extends TestCase
 {
     use EngineTestCaseTrait;
 
-    protected static $hasConnection = true;
+    protected ?\Memcache $connection = null;
 
-    /**
-     * @var \Memcached
-     */
-    protected $connection;
-
-    protected function setUp()
+    protected function setUp(): void
     {
-        if (!self::$hasConnection) {
-            $this->markTestSkipped('Memcache connection not available');
-        }
-
         if (!$this->connection) {
             $this->connection = $this->newConnection();
         }
 
-        $connection = new Connection();
-        $connection->setId(1);
-        $connection->setName('foo');
-        $connection->setClass(CallbackConnection::class);
-        $connection->setConfig([
+        $connection = new Connection(1, 'foo', CallbackConnection::class, [
             'callback' => function(){
                 return $this->connection;
             },
@@ -69,18 +56,7 @@ abstract class MemcacheTestCase extends TestCase
         $this->getConnectionRepository()->add($connection);
     }
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-
-        if (self::$hasConnection) {
-            if ($this->connection instanceof \Memcached) {
-                $this->connection->flush();
-            }
-        }
-    }
-
-    protected function newConnection()
+    protected function newConnection(): \Memcache
     {
         $connector = new Memcache();
 
@@ -91,11 +67,7 @@ abstract class MemcacheTestCase extends TestCase
 
             return $connection;
         } catch (\Exception $e) {
-            self::$hasConnection = false;
-
             $this->markTestSkipped('Memcache connection not available');
         }
-
-        return null;
     }
 }
