@@ -13,7 +13,7 @@
   ],
   "require": {
     "php": ">=8.0",
-    "ext-memcache": ">=8.0",
+    "ext-memcache": "*",
     "fusio/engine": "^5.0"
   },
   "require-dev": {
