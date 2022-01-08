@@ -27,7 +27,6 @@ use Fusio\Engine\Form\Container;
 use Fusio\Engine\Form\Element\Tag;
 use Fusio\Engine\Parameters;
 use Fusio\Engine\Test\EngineTestCaseTrait;
-use Memcached;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -43,7 +42,6 @@ class MemcacheTest extends TestCase
 
     public function testGetConnection()
     {
-        /** @var Memcache $connectionFactory */
         $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
 
         $config = new Parameters([
@@ -52,7 +50,7 @@ class MemcacheTest extends TestCase
 
         $connection = $connectionFactory->getConnection($config);
 
-        $this->assertInstanceOf(Memcached::class, $connection);
+        $this->assertInstanceOf(\Memcache::class, $connection);
     }
 
     public function testConfigure()
@@ -72,7 +70,6 @@ class MemcacheTest extends TestCase
 
     public function testPing()
     {
-        /** @var Memcache $connectionFactory */
         $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
 
         $config = new Parameters([

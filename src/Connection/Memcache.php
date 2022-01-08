@@ -23,7 +23,6 @@ namespace Fusio\Adapter\Memcache\Connection;
 
 use Fusio\Engine\Connection\PingableInterface;
 use Fusio\Engine\ConnectionInterface;
-use Fusio\Engine\Exception\ConfigurationException;
 use Fusio\Engine\Form\BuilderInterface;
 use Fusio\Engine\Form\ElementFactoryInterface;
 use Fusio\Engine\ParametersInterface;
@@ -44,10 +43,6 @@ class Memcache implements ConnectionInterface, PingableInterface
 
     public function getConnection(ParametersInterface $config): \Memcache
     {
-        if (!class_exists('Memcache')) {
-            throw new ConfigurationException('PHP extension "memcache" is not installed');
-        }
-
         $memcache = new \Memcache();
         $hosts    = $config->get('host');
 
