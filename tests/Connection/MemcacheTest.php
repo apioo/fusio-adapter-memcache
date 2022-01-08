@@ -65,7 +65,7 @@ class MemcacheTest extends TestCase
 
         $this->assertInstanceOf(Container::class, $builder->getForm());
 
-        $elements = $builder->getForm()->getProperty('element');
+        $elements = $builder->getForm()->getElements();
         $this->assertEquals(1, count($elements));
         $this->assertInstanceOf(Tag::class, $elements[0]);
     }
