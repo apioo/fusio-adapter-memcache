@@ -22,6 +22,7 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           coverage: none
+          extensions: memcache
       - name: Composer install
         run: composer install --no-interaction --no-ansi --no-progress
       - name: Run PHPUnit
