@@ -51,6 +51,10 @@ class MemcacheTest extends TestCase
         $connection = $connectionFactory->getConnection($config);
 
         $this->assertInstanceOf(\Memcache::class, $connection);
+
+        $connection->add('foo', 'bar');
+
+        $this->assertEquals('bar', $connection->get('foo'));
     }
 
     public function testConfigure()
