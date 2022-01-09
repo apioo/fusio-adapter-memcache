@@ -72,8 +72,7 @@ class Memcache implements ConnectionInterface, PingableInterface
     public function ping(mixed $connection): bool
     {
         if ($connection instanceof \Memcache) {
-            $stats = $connection->getStats();
-            return !empty($stats);
+            return $connection->getVersion() !== false;
         } else {
             return false;
         }
