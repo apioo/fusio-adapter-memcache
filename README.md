@@ -6,6 +6,6 @@ uses the memcached PHP extension. You can install the adapter with the following
 steps inside your Fusio project:
 
     composer require fusio/adapter-memcache
-    php bin/fusio system:register Fusio\Adapter\Memcache\Adapter
+    php bin/fusio system:register "Fusio\Adapter\Memcache\Adapter"
 
-[Fusio]: http://fusio-project.org/
+[Fusio]: https://www.fusio-project.org/

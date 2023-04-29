@@ -1,5 +1,0 @@
-{
-  "connectionClass": [
-    "Fusio\\Adapter\\Memcache\\Connection\\Memcache"
-  ]
-}

@@ -22,12 +22,11 @@
 namespace Fusio\Adapter\Memcache\Tests\Connection;
 
 use Fusio\Adapter\Memcache\Connection\Memcache;
+use Fusio\Adapter\Memcache\Tests\MemcacheTestCase;
 use Fusio\Engine\Form\Builder;
 use Fusio\Engine\Form\Container;
 use Fusio\Engine\Form\Element\Tag;
 use Fusio\Engine\Parameters;
-use Fusio\Engine\Test\EngineTestCaseTrait;
-use PHPUnit\Framework\TestCase;
 
 /**
  * MemcacheTest
@@ -36,10 +35,8 @@ use PHPUnit\Framework\TestCase;
  * @license http://www.gnu.org/licenses/agpl-3.0
  * @link    https://www.fusio-project.org/
  */
-class MemcacheTest extends TestCase
+class MemcacheTest extends MemcacheTestCase
 {
-    use EngineTestCaseTrait;
-
     public function testGetConnection()
     {
         $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
