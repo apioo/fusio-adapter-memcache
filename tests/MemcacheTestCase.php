@@ -21,7 +21,7 @@
 
 namespace Fusio\Adapter\Memcache\Tests;
 
-use Fusio\Adapter\Ldap\Connection\Ldap;
+use Fusio\Adapter\Memcache\Connection\Memcache;
 use Fusio\Engine\Action\Runtime;
 use Fusio\Engine\Test\EngineTestCaseTrait;
 use PHPUnit\Framework\TestCase;
@@ -40,6 +40,6 @@ abstract class MemcacheTestCase extends TestCase
 
     protected function configure(Runtime $runtime, Container $container): void
     {
-        $container->set(Ldap::class, new Ldap());
+        $container->set(Memcache::class, new Memcache());
     }
 }
