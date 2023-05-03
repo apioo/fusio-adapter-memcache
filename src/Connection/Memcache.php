@@ -44,7 +44,7 @@ class Memcache implements ConnectionInterface, PingableInterface
     public function getConnection(ParametersInterface $config): \Memcache
     {
         $memcache = new \Memcache();
-        $hosts    = $config->get('host');
+        $hosts = $config->get('host');
 
         if (is_array($hosts)) {
             foreach ($hosts as $part) {
@@ -66,7 +66,7 @@ class Memcache implements ConnectionInterface, PingableInterface
 
     public function configure(BuilderInterface $builder, ElementFactoryInterface $elementFactory): void
     {
-        $builder->add($elementFactory->newTag('host', 'Host', 'Comma seperated list of [ip]:[port] i.e. <code>192.168.2.18:11211,192.168.2.19:11211</code>'));
+        $builder->add($elementFactory->newCollection('host', 'Host', 'Comma seperated list of [ip]:[port] i.e. <code>192.168.2.18:11211,192.168.2.19:11211</code>'));
     }
 
     public function ping(mixed $connection): bool
