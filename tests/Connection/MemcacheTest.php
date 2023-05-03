@@ -25,7 +25,7 @@ use Fusio\Adapter\Memcache\Connection\Memcache;
 use Fusio\Adapter\Memcache\Tests\MemcacheTestCase;
 use Fusio\Engine\Form\Builder;
 use Fusio\Engine\Form\Container;
-use Fusio\Engine\Form\Element\Tag;
+use Fusio\Engine\Form\Element\Collection;
 use Fusio\Engine\Parameters;
 
 /**
@@ -66,7 +66,7 @@ class MemcacheTest extends MemcacheTestCase
 
         $elements = $builder->getForm()->getElements();
         $this->assertEquals(1, count($elements));
-        $this->assertInstanceOf(Tag::class, $elements[0]);
+        $this->assertInstanceOf(Collection::class, $elements[0]);
     }
 
     public function testPing()
