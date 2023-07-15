@@ -21,14 +21,12 @@
 
 namespace Fusio\Adapter\Memcache\Tests;
 
-use Fusio\Adapter\Memcache\Connection\Memcache;
-use Fusio\Engine\Action\Runtime;
+use Fusio\Adapter\Memcache\Adapter;
 use Fusio\Engine\Test\EngineTestCaseTrait;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\DependencyInjection\Container;
 
 /**
- * LdapTestCase
+ * MemcacheTestCase
  *
  * @author  Christoph Kappestein <christoph.kappestein@gmail.com>
  * @license http://www.gnu.org/licenses/agpl-3.0
@@ -38,8 +36,8 @@ abstract class MemcacheTestCase extends TestCase
 {
     use EngineTestCaseTrait;
 
-    protected function configure(Runtime $runtime, Container $container): void
+    protected function getAdapterClass(): string
     {
-        $container->set(Memcache::class, new Memcache());
+        return Adapter::class;
     }
 }
