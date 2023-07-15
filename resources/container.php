@@ -1,5 +1,6 @@
 <?php
 
+use Fusio\Adapter\Memcache\Connection\Memcache;
 use Fusio\Engine\Adapter\ServiceBuilder;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
