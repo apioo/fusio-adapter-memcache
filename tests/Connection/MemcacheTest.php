@@ -23,6 +23,7 @@ namespace Fusio\Adapter\Memcache\Tests\Connection;
 
 use Fusio\Adapter\Memcache\Connection\Memcache;
 use Fusio\Adapter\Memcache\Tests\MemcacheTestCase;
+use Fusio\Engine\ConfigurableInterface;
 use Fusio\Engine\Form\Builder;
 use Fusio\Engine\Form\Container;
 use Fusio\Engine\Form\Element\Collection;
@@ -37,7 +38,7 @@ use Fusio\Engine\Parameters;
  */
 class MemcacheTest extends MemcacheTestCase
 {
-    public function testGetConnection()
+    public function testGetConnection(): void
     {
         $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
 
@@ -54,11 +55,13 @@ class MemcacheTest extends MemcacheTestCase
         $this->assertEquals('bar', $connection->get('foo'));
     }
 
-    public function testConfigure()
+    public function testConfigure(): void
     {
         $connection = $this->getConnectionFactory()->factory(Memcache::class);
         $builder    = new Builder();
         $factory    = $this->getFormElementFactory();
+
+        $this->assertInstanceOf(ConfigurableInterface::class, $connection);
 
         $connection->configure($builder, $factory);
 
@@ -69,7 +72,7 @@ class MemcacheTest extends MemcacheTestCase
         $this->assertInstanceOf(Collection::class, $elements[0]);
     }
 
-    public function testPing()
+    public function testPing(): void
     {
         $connectionFactory = $this->getConnectionFactory()->factory(Memcache::class);
 
