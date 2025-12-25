@@ -24,6 +24,7 @@ namespace Fusio\Adapter\Memcache\Tests\Connection;
 use Fusio\Adapter\Memcache\Connection\Memcache;
 use Fusio\Adapter\Memcache\Tests\MemcacheTestCase;
 use Fusio\Engine\ConfigurableInterface;
+use Fusio\Engine\Connection\PingableInterface;
 use Fusio\Engine\Form\Builder;
 use Fusio\Engine\Form\Container;
 use Fusio\Engine\Form\Element\Collection;
@@ -82,6 +83,7 @@ class MemcacheTest extends MemcacheTestCase
 
         $connection = $connectionFactory->getConnection($config);
 
+        $this->assertInstanceOf(PingableInterface::class, $connectionFactory);
         $this->assertTrue($connectionFactory->ping($connection));
     }
 }
